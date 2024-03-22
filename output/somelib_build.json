@@ -1,0 +1,109 @@
+{
+    "version": "1.0.1",
+    "name": "somelib_build",
+    "number": "1",
+    "agent": {},
+    "started": "2024-03-22T01:20:04.877-0700",
+    "buildAgent": {
+        "name": "conan",
+        "version": "2.1.0"
+    },
+    "modules": [
+        {
+            "type": "conan",
+            "id": "somelibrary/1.0#0690c92dfdc1cb51c1325696c0832b83",
+            "artifacts": [
+                {
+                    "type": "py",
+                    "sha256": "8ea9a110352229f86d886dd7b18ef36f0739a42937d31df125a11f652bd1b0ef",
+                    "sha1": "610a0f520c055482ec132be31e9d8bb142651a01",
+                    "md5": "bf32272b23ba938f669a7ac4265f2d93",
+                    "name": "conanfile.py",
+                    "path": "sv-conan-local/_/somelibrary/1.0/_/0690c92dfdc1cb51c1325696c0832b83/export/conanfile.py"
+                },
+                {
+                    "type": "txt",
+                    "sha256": "cfbed6fb28155c62e336a35526a14d36d2516d7ad09f1591976153014ca86670",
+                    "sha1": "46fb4479cf3b3f718efc0156b4bd679d6b95ae64",
+                    "md5": "c883f1a00519789d0cb449d0e07f8faf",
+                    "name": "conanmanifest.txt",
+                    "path": "sv-conan-local/_/somelibrary/1.0/_/0690c92dfdc1cb51c1325696c0832b83/export/conanmanifest.txt"
+                }
+            ],
+            "dependencies": [
+                {
+                    "type": "py",
+                    "sha256": "e7e3e88d9723f8daf864f72601d1e1e9abaf473e2639d4dfd0bc3ca52ed472b9",
+                    "sha1": "7bce45b5bc770bdbe281d81716d93d6d3557bc2f",
+                    "md5": "c06dc4cd990a6a8846b79981a46c1eec",
+                    "id": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2 :: conanfile.py",
+                    "requestedBy": []
+                },
+                {
+                    "type": "txt",
+                    "sha256": "f8931b5a466a587bbb004b19cea92ef98d035d07a5b73c89cda752c2c536b221",
+                    "sha1": "c10f5d8d3ba4b0a2360c6e3f2e19ea129ba3f90a",
+                    "md5": "c26df9d0f106384da75f598a9a906933",
+                    "id": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2 :: conanmanifest.txt",
+                    "requestedBy": []
+                }
+            ]
+        },
+        {
+            "type": "conan",
+            "id": "somelibrary/1.0#0690c92dfdc1cb51c1325696c0832b83:677fd50e4f08280356c58354701d4e2a43b71ce6#7690bf91b8fa7676baf78fd164bed1b9",
+            "artifacts": [
+                {
+                    "type": "tgz",
+                    "sha256": "da0715337569ed4befd6bb35d7f602ee83b47bb7b531001f46abd8dfc2e86021",
+                    "sha1": "be152c82859285658a06816aaaec529a159c33d3",
+                    "md5": "25f53ac9685e07815b990e7c6f21bfd0",
+                    "name": "conan_package.tgz",
+                    "path": "sv-conan-local/_/somelibrary/1.0/_/0690c92dfdc1cb51c1325696c0832b83/package/677fd50e4f08280356c58354701d4e2a43b71ce6/7690bf91b8fa7676baf78fd164bed1b9/conan_package.tgz"
+                },
+                {
+                    "type": "txt",
+                    "sha256": "67b30bd55cb3b8f9a8daefb907a5239364c72d0a2a3cde65ce236cafa17bfccf",
+                    "sha1": "ded7905f3b9e929ed493ef6ec32d109ec350b864",
+                    "md5": "94dedbaa4c3de5571089506c4b5c9df3",
+                    "name": "conanmanifest.txt",
+                    "path": "sv-conan-local/_/somelibrary/1.0/_/0690c92dfdc1cb51c1325696c0832b83/package/677fd50e4f08280356c58354701d4e2a43b71ce6/7690bf91b8fa7676baf78fd164bed1b9/conanmanifest.txt"
+                },
+                {
+                    "type": "txt",
+                    "sha256": "7fde7418bfa26d624a2b4b8d8fb31c3d09c43a12e1f01461a7ff77d863da0f65",
+                    "sha1": "677fd50e4f08280356c58354701d4e2a43b71ce6",
+                    "md5": "8c9c669c1963ab1d0b3788590acc77e6",
+                    "name": "conaninfo.txt",
+                    "path": "sv-conan-local/_/somelibrary/1.0/_/0690c92dfdc1cb51c1325696c0832b83/package/677fd50e4f08280356c58354701d4e2a43b71ce6/7690bf91b8fa7676baf78fd164bed1b9/conaninfo.txt"
+                }
+            ],
+            "dependencies": [
+                {
+                    "type": "tgz",
+                    "sha256": "da0715337569ed4befd6bb35d7f602ee83b47bb7b531001f46abd8dfc2e86021",
+                    "sha1": "be152c82859285658a06816aaaec529a159c33d3",
+                    "md5": "25f53ac9685e07815b990e7c6f21bfd0",
+                    "id": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2:0aabda8bae602d58bd99fac5d81247c2a2c2f516#3696191bec642c3b3961315b7ad676d1 :: conan_package.tgz",
+                    "requestedBy": []
+                },
+                {
+                    "type": "txt",
+                    "sha256": "80dd1004743cf6e48bd366a50b5cde6f9b92171f3f3035cae01e5355cefcdc77",
+                    "sha1": "a08e592625c28b0d8df2ccd835b6d9ea065583ff",
+                    "md5": "61e83092c0bf1ca4b2929506a06c53b8",
+                    "id": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2:0aabda8bae602d58bd99fac5d81247c2a2c2f516#3696191bec642c3b3961315b7ad676d1 :: conanmanifest.txt",
+                    "requestedBy": []
+                },
+                {
+                    "type": "txt",
+                    "sha256": "2158c31201cd12b57b5cf73a7a322f50b874130c6d333f5b2e2218b65f457f67",
+                    "sha1": "0aabda8bae602d58bd99fac5d81247c2a2c2f516",
+                    "md5": "1f993d277b03764a837c5fe73d9424ed",
+                    "id": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2:0aabda8bae602d58bd99fac5d81247c2a2c2f516#3696191bec642c3b3961315b7ad676d1 :: conaninfo.txt",
+                    "requestedBy": []
+                }
+            ]
+        }
+    ]
+}

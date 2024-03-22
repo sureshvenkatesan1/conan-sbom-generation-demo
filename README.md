@@ -1,6 +1,6 @@
 ## Create an SBOM from BuildInfo in Artifactory demo
 
-The demo (cloned  from https://github.com/czoido/sbom-generation-demo.git and modified) uses a fake openssl empty library with known issues and an empty somelibrary
+This repository serves as a demonstration for generating Software Bill of Materials (SBOM) using Conan package manager. The sample application is forked from [czoido/sbom-generation-demo](https://github.com/czoido/sbom-generation-demo) with fake libraries. One of the libraries included is openssl, which is reported to have vulnerabilities, and the SBOM report helps in identifying it.
 
 Follow the steps and substitute the ``<>`` placeholders with your own information
 
@@ -11,28 +11,234 @@ Follow the steps and substitute the ``<>`` placeholders with your own informatio
 # <user> and <password> for the Artifactory repo
 ```
 
-Steps:
+### Steps:
 
+
+## Deploying to Artifactory Instance
+
+To build the Conan application and upload to the Artifactory instance referred by server-id `proservicesone` using  `build name` *somelib_build* and `build number` *1* , then index and scan the build in Xray and generate a SBOM follow these steps:
+
+### Add Build to Xray Indexed Resources
+
+Run the following command to add build to Xray indexed resources:
+
+```bash
+curl -XPOST -u admin:password https://servername.jfrog.io/xray/api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["build-name"]}'
 ```
 
-# clean from previous runs
+or using jfrog CLI:
 
-conan remove "somelibrary*" -r=<conan_remote_name> -c
-conan remove "openssl/1.1.1c*" -r=<conan_remote_name> -c
+```bash
+jf xr curl -XPOST api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["somelib_build"]}'  --server-id=proservicesone
+```
+
+### Create Repositories
+
+Navigate to the `create_repositories` directory and create  repositories from the exported configurations:
+
+```bash
+cd create_repositories
+
+jf rt curl  -X PUT api/repositories/sv-conan-local -H "Content-Type: application/json" -T sv-conan-local-config.json --server-id=proservicesone
+jf rt curl  -X PUT api/repositories/sv-conan-remote -H "Content-Type: application/json" -T sv-conan-remote-config.json --server-id=proservicesone
+jf rt curl  -X PUT api/repositories/sv-conan-virtual -H "Content-Type: application/json" -T sv-conan-virtual-config.json --server-id=proservicesone
+```
+
+### Configure Xray Index and Retention Policy
+
+Set the Xray index and retention policy for the local and remote repositories to 91 days:
+
+```bash
+jf xr curl -XPUT api/v1/repos_config -H "Content-Type: application/json" -d '{"repo_name": "sv-conan-local","repo_config":{"retention_in_days":91}}' --server-id=proservicesone
+jf xr curl -XPUT api/v1/repos_config -H "Content-Type: application/json" -d '{"repo_name": "sv-conan-remote","repo_config":{"retention_in_days":91}}' --server-id=proservicesone
+```
+
+### Create Policy and Watch
+
+Execute the following commands to create a policy and watch:
+
+```bash
+
+cd ../xray_watch_policy
+
+jf xr curl -XPOST -H "Content-Type: application/json" api/v2/policies -T all-sev-sec.json --server-id proservicesone
+
+jf xr curl -XPOST -H "Content-Type: application/json" api/v2/watches -T sv-all-sev-sec_watch.json --server-id proservicesone
+```
+
+### Building the Application
+
+To build the application, follow these steps:
+
+```bash
+cd ~/myCode/github-sv1/
+
+git clone https://github.com/sureshvenkatesan1/conan-sbom-generation-demo.git
+cd conan-sbom-generation-demo
+
+# Clean from previous runs
+# Note: -r is the virtual repo
+
+conan remove "somelibrary*" -r=sv-conan-virtual -c
+conan remove "openssl/1.1.1c*" -r=sv-conan-virtual -c
 conan remove "openssl/1.1.1c*" -c
 conan remove "somelibrary*" -c
 
-# a fake openssl
-
+# Fake openssl
 conan create openssl --build="openssl/1.1.1c*"
-
-conan upload "openssl/1.1.1c*" -r=<conan_remote_name> -c
-
-conan create somelibrary --format=json --build="somelibrary*" -r=<conan_remote_name> > create_output.json
-
-conan upload "somelibrary*" -r=<conan_remote_name> -c
-
-conan art:build-info create create_output.json somelib_build 1 <artifactory_repo_name> --url=<artifactory_url> --user=<user> --password=<password> --with-dependencies > somelib_build.json
-
-conan art:build-info upload somelib_build.json --url=<artifactory_url> --user=<user> --password=<password>
+conan upload "openssl/1.1.1c*" -r=sv-conan-virtual -c
+conan create somelibrary --format=json --build="somelibrary*" -r=sv-conan-virtual > create_output.json
+conan upload "somelibrary*" -r=sv-conan-virtual -c
 ```
+
+As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
+
+```bash
+# Create the buildInfo file.
+conan art:build-info create create_output.json somelib_build 1 sv-conan-local --server proservicesone --with-dependencies > somelib_build.json
+
+# Publish the buildInfo file
+conan art:build-info upload somelib_build.json --server proservicesone
+
+# Backup or delete the temp files
+mv -f create_output.json output/
+mv -f somelib_build.json output/
+```
+Since the repos and the build are  already indexed Indexed by Xray , go the `Xray > Scans List` to view the SBOM for the build run:
+![Build SBOM](images/build_sbom.jpg)
+
+Similarly the published artifact SBOM shows:
+![somelibrary SBOM](images/somelibrary_sbom.jpg)
+
+---
+Other useful Xray Rest APIs:
+
+### Force the reindex of the build using [Force Reindex](https://jfrog.com/help/r/xray-rest-apis/force-reindex):
+```
+jf xr curl -XPOST  /api/v1/forceReindex -H 'content-type:application/json'  --server-id=proservicesone -d '{
+    "artifactory_id": "default",
+    "builds": [
+        {
+            "name": "somelib_build", 
+            "number": "1"
+        }
+    ]
+}'
+```
+Output:
+```
+{"sent_to_reindex":{"builds":[{"name":"somelib_build","number":"1","build_repo":"artifactory-build-info"}]}}
+```
+---
+
+### Do a build scan
+
+There are 2 ways to scan the build.
+
+[Scan Build V1](https://jfrog.com/help/r/jfrog-rest-apis/scan-build-v1) : POST /api/v1/scanBuild
+
+vs
+
+[Scan Build V2](https://jfrog.com/help/r/xray-rest-apis/scan-build-v2) : POST /api/v2/ci/build
+
+As per [Scanning Published Builds](https://jfrog.com/help/r/jfrog-cli/scanning-published-builds)
+``` 
+jf bs somelib_build 1 --server-id=proservicesone
+or
+jf build-scan somelib_build 1 --server-id=proservicesone
+```
+runs the  `Scan Build V2` POST  xray api.
+```
+jf xr curl -XPOST /api/v2/ci/build  -H "Content-Type: application/json"  --server-id=proservicesone \
+-d '{
+ "build_name": "somelib_build",
+ "build_number": "1"
+}'
+```
+We strongly recommend moving to using the v2 version of the scan build API. This API scans build-info with Xray directly, without using Artifactory as a proxy.
+
+Output:
+```
+Output:
+{"summary":{"total_alerts":0,"fail_build":false,"message":"No Xray “Fail build in case of a violation” policy rule has been defined on this build. The Xray scan will run in parallel to the deployment of the build and will not obstruct the build. To review the Xray scan results, see the Xray Violations tab in the UI.","more_details_url":""},"alerts":[],"licenses":[]}
+```
+---
+
+### Get the build scan results
+
+Use the GET option of the [Scan Build V2](https://jfrog.com/help/r/xray-rest-apis/scan-build-v2)
+```
+jf xr curl -XGET /api/v2/ci/build/somelib_build/1  --server-id=proservicesone
+```
+Output:
+```
+{"info":"No Xray “Fail build in case of a violation” policy rule has been defined on this build. The Xray scan will run in parallel to the deployment of the build and will not obstruct the build. To review the Xray scan results, see the Xray Violations tab in the UI."}
+```
+
+Note:
+When you run:
+```
+jf xr curl -XGET "/api/v2/ci/build/somelib_build/1?include_vulnerabilities=true" --server-id=proservicesone | jq | grep -i violation
+```
+It returns all the `vulnerabilities` i.e CVEs but `"violations": []` i.e no violations, though   in  UI it shows both the the vulnerabilities and violations.
+```
+jf xr curl -XGET "/api/v2/ci/build/somelib_build/1?include_vulnerabilities=true" --server-id=proservicesone -s | jq | grep -i "cve\":" | wc -l
+
+Output: 29
+```
+
+
+Note: The [Build Summary](https://jfrog.com/help/r/jfrog-rest-apis/build-summary) API might be helpful  to see the CVE details as well.
+```
+jf xr curl -XGET "/api/v1/summary/build?build_name=somelib_build&build_number=1" --server-id=proservicesone -s | jq | grep -i "cve\":" | wc -l
+
+Output: 29
+```
+This output also does not have any violations.
+
+---
+### Get the Build Scan status:
+
+Use the [Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/scan-status) i.e (/api/v1/scan/status) API
+```
+jf xr curl -XPOST "/api/v1/scan/status/build" -H "Content-Type: application/json" --server-id=proservicesone \
+-d '{ "name": "somelib_build", "version": "1"}'
+```
+
+Output:
+```
+{"status":"scanned","is_impact_paths_recovery_required":false}
+```
+
+For Builds you can also use the “[Build Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/build-scan-status)” (/api/v1/build/status) API.
+```
+jf xr curl -H "Content-Type: application/json" \
+-XPOST "/api/v1/build/status" --server-id=proservicesone \
+-d '{ "name": "somelib_build", "number": "1"}'
+```
+Output:
+```
+{"overall":{"status":"DONE","time":"2024-03-22T01:20:30Z"},"details":{"sca":{"status":"DONE","time":"2024-03-22T01:20:28Z"},"violations":{"status":"DONE","time":"2024-03-22T01:20:30Z"}}}
+```
+
+---
+
+### How to get the vulnerability details of the whole Repo  or Project ?
+Use the reports APIs in https://jfrog.com/help/r/jfrog-rest-apis/reports 
+
+Reports can also be generated in the UI if you prefer.
+
+If you encounter the error message "Artifact doesn't exist or is not indexed/cached in Xray," you should prepend "default" before the artifact path as "default/libs-release-local/com/dell/devops/config/dell-config-server/2.0.0-RELEASE/dell-config-server-2.0.0-RELEASE.jar." If you continue to face the same error, please follow these steps: 
+
+- Go to the Artifactory UI.
+
+- Navigate to Administration -> Services | Artifactory -> Config descriptor.
+
+- Within the <xrayConfig> tag, locate the value of the <artifactoryId> tag.
+
+- Replace "default" in the path with the value you found in <artifactoryId>. 
+
+- For instance, if the <artifactoryId> value is "artifactory," then the updated path will be "artifactory/libs-release-local/com/example/devops/config/example-config-server/2.0.0-RELEASE/example-config-server-2.0.0-RELEASE.jar."
+
+
+---

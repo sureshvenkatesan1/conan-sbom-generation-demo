@@ -1,0 +1,351 @@
+{
+    "graph": {
+        "nodes": {
+            "0": {
+                "ref": "conanfile",
+                "id": "0",
+                "recipe": "Cli",
+                "package_id": null,
+                "prev": null,
+                "rrev": null,
+                "rrev_timestamp": null,
+                "prev_timestamp": null,
+                "remote": null,
+                "binary_remote": null,
+                "build_id": null,
+                "binary": null,
+                "invalid_build": false,
+                "info_invalid": null,
+                "name": null,
+                "user": null,
+                "channel": null,
+                "url": null,
+                "license": null,
+                "author": null,
+                "description": null,
+                "homepage": null,
+                "build_policy": null,
+                "upload_policy": null,
+                "revision_mode": "hash",
+                "provides": null,
+                "deprecated": null,
+                "win_bash": null,
+                "win_bash_run": null,
+                "default_options": null,
+                "options_description": null,
+                "version": null,
+                "topics": null,
+                "package_type": "unknown",
+                "settings": {
+                    "os": "Macos",
+                    "arch": "x86_64",
+                    "compiler": "apple-clang",
+                    "compiler.cppstd": "gnu17",
+                    "compiler.libcxx": "libc++",
+                    "compiler.version": "15",
+                    "build_type": "Release"
+                },
+                "options": {},
+                "options_definitions": {},
+                "generators": [],
+                "python_requires": null,
+                "system_requires": {},
+                "recipe_folder": null,
+                "source_folder": null,
+                "build_folder": null,
+                "generators_folder": null,
+                "package_folder": null,
+                "cpp_info": {
+                    "root": {
+                        "includedirs": [
+                            "include"
+                        ],
+                        "srcdirs": null,
+                        "libdirs": [
+                            "lib"
+                        ],
+                        "resdirs": null,
+                        "bindirs": [
+                            "bin"
+                        ],
+                        "builddirs": null,
+                        "frameworkdirs": null,
+                        "system_libs": null,
+                        "frameworks": null,
+                        "libs": null,
+                        "defines": null,
+                        "cflags": null,
+                        "cxxflags": null,
+                        "sharedlinkflags": null,
+                        "exelinkflags": null,
+                        "objects": null,
+                        "sysroot": null,
+                        "requires": null,
+                        "properties": null
+                    }
+                },
+                "conf_info": {},
+                "label": "cli",
+                "dependencies": {
+                    "1": {
+                        "ref": "somelibrary/1.0",
+                        "run": false,
+                        "libs": true,
+                        "skip": false,
+                        "test": false,
+                        "force": false,
+                        "direct": true,
+                        "build": false,
+                        "transitive_headers": null,
+                        "transitive_libs": null,
+                        "headers": true,
+                        "package_id_mode": null,
+                        "visible": true
+                    },
+                    "2": {
+                        "ref": "openssl/1.1.1c",
+                        "run": false,
+                        "libs": true,
+                        "skip": false,
+                        "test": false,
+                        "force": false,
+                        "direct": false,
+                        "build": false,
+                        "transitive_headers": null,
+                        "transitive_libs": null,
+                        "headers": true,
+                        "package_id_mode": null,
+                        "visible": true
+                    }
+                },
+                "context": "host",
+                "test": false
+            },
+            "1": {
+                "ref": "somelibrary/1.0#0690c92dfdc1cb51c1325696c0832b83",
+                "id": "1",
+                "recipe": "Cache",
+                "package_id": "677fd50e4f08280356c58354701d4e2a43b71ce6",
+                "prev": "7690bf91b8fa7676baf78fd164bed1b9",
+                "rrev": "0690c92dfdc1cb51c1325696c0832b83",
+                "rrev_timestamp": 1711070148.78146,
+                "prev_timestamp": null,
+                "remote": null,
+                "binary_remote": null,
+                "build_id": null,
+                "binary": "Build",
+                "invalid_build": false,
+                "info_invalid": null,
+                "name": "somelibrary",
+                "user": null,
+                "channel": null,
+                "url": null,
+                "license": null,
+                "author": null,
+                "description": null,
+                "homepage": null,
+                "build_policy": null,
+                "upload_policy": null,
+                "revision_mode": "hash",
+                "provides": null,
+                "deprecated": null,
+                "win_bash": null,
+                "win_bash_run": null,
+                "default_options": null,
+                "options_description": null,
+                "version": "1.0",
+                "topics": null,
+                "package_type": "unknown",
+                "settings": {
+                    "os": "Macos",
+                    "arch": "x86_64",
+                    "compiler": "apple-clang",
+                    "compiler.cppstd": "gnu17",
+                    "compiler.libcxx": "libc++",
+                    "compiler.version": "15",
+                    "build_type": "Release"
+                },
+                "options": {},
+                "options_definitions": {},
+                "generators": [],
+                "python_requires": null,
+                "system_requires": {},
+                "recipe_folder": "/Users/sureshv/.conan2/p/somel86ff919dec067/e",
+                "source_folder": "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/b",
+                "build_folder": "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/b",
+                "generators_folder": "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/b",
+                "package_folder": "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/p",
+                "cpp_info": {
+                    "root": {
+                        "includedirs": [
+                            "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/p/include"
+                        ],
+                        "srcdirs": null,
+                        "libdirs": [
+                            "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/p/lib"
+                        ],
+                        "resdirs": null,
+                        "bindirs": [
+                            "/Users/sureshv/.conan2/p/b/somelf74ce85e5985f/p/bin"
+                        ],
+                        "builddirs": null,
+                        "frameworkdirs": null,
+                        "system_libs": null,
+                        "frameworks": null,
+                        "libs": null,
+                        "defines": null,
+                        "cflags": null,
+                        "cxxflags": null,
+                        "sharedlinkflags": null,
+                        "exelinkflags": null,
+                        "objects": null,
+                        "sysroot": null,
+                        "requires": [],
+                        "properties": null
+                    }
+                },
+                "conf_info": {},
+                "label": "somelibrary/1.0",
+                "info": {
+                    "settings": {
+                        "os": "Macos",
+                        "arch": "x86_64",
+                        "compiler": "apple-clang",
+                        "compiler.cppstd": "gnu17",
+                        "compiler.libcxx": "libc++",
+                        "compiler.version": "15",
+                        "build_type": "Release"
+                    },
+                    "requires": [
+                        "openssl/1.Y.Z"
+                    ]
+                },
+                "dependencies": {
+                    "2": {
+                        "ref": "openssl/1.1.1c",
+                        "run": false,
+                        "libs": true,
+                        "skip": false,
+                        "test": false,
+                        "force": false,
+                        "direct": true,
+                        "build": false,
+                        "transitive_headers": null,
+                        "transitive_libs": null,
+                        "headers": true,
+                        "package_id_mode": "semver_mode",
+                        "visible": true
+                    }
+                },
+                "context": "host",
+                "test": false
+            },
+            "2": {
+                "ref": "openssl/1.1.1c#5b07fc39a1fb7fa98bc6dc834c807cc2",
+                "id": "2",
+                "recipe": "Cache",
+                "package_id": "0aabda8bae602d58bd99fac5d81247c2a2c2f516",
+                "prev": "3696191bec642c3b3961315b7ad676d1",
+                "rrev": "5b07fc39a1fb7fa98bc6dc834c807cc2",
+                "rrev_timestamp": 1711068949.333596,
+                "prev_timestamp": 1711068949.352524,
+                "remote": null,
+                "binary_remote": null,
+                "build_id": null,
+                "binary": "Cache",
+                "invalid_build": false,
+                "info_invalid": null,
+                "name": "openssl",
+                "user": null,
+                "channel": null,
+                "url": null,
+                "license": null,
+                "author": null,
+                "description": null,
+                "homepage": null,
+                "build_policy": null,
+                "upload_policy": null,
+                "revision_mode": "hash",
+                "provides": null,
+                "deprecated": null,
+                "win_bash": null,
+                "win_bash_run": null,
+                "default_options": null,
+                "options_description": null,
+                "version": "1.1.1c",
+                "topics": null,
+                "package_type": "unknown",
+                "settings": {
+                    "os": "Macos",
+                    "arch": "x86_64",
+                    "compiler": "apple-clang",
+                    "compiler.cppstd": "gnu17",
+                    "compiler.libcxx": "libc++",
+                    "compiler.version": "15",
+                    "build_type": "Release"
+                },
+                "options": {},
+                "options_definitions": {},
+                "generators": [],
+                "python_requires": null,
+                "system_requires": {},
+                "recipe_folder": "/Users/sureshv/.conan2/p/opens2d88b6a9ce38b/e",
+                "source_folder": null,
+                "build_folder": null,
+                "generators_folder": null,
+                "package_folder": "/Users/sureshv/.conan2/p/b/opens1117c7bce2b2d/p",
+                "cpp_info": {
+                    "root": {
+                        "includedirs": [
+                            "/Users/sureshv/.conan2/p/b/opens1117c7bce2b2d/p/include"
+                        ],
+                        "srcdirs": null,
+                        "libdirs": [
+                            "/Users/sureshv/.conan2/p/b/opens1117c7bce2b2d/p/lib"
+                        ],
+                        "resdirs": null,
+                        "bindirs": [
+                            "/Users/sureshv/.conan2/p/b/opens1117c7bce2b2d/p/bin"
+                        ],
+                        "builddirs": null,
+                        "frameworkdirs": null,
+                        "system_libs": null,
+                        "frameworks": null,
+                        "libs": null,
+                        "defines": null,
+                        "cflags": null,
+                        "cxxflags": null,
+                        "sharedlinkflags": null,
+                        "exelinkflags": null,
+                        "objects": null,
+                        "sysroot": null,
+                        "requires": [],
+                        "properties": null
+                    }
+                },
+                "conf_info": {},
+                "label": "openssl/1.1.1c",
+                "info": {
+                    "settings": {
+                        "os": "Macos",
+                        "arch": "x86_64",
+                        "compiler": "apple-clang",
+                        "compiler.cppstd": "gnu17",
+                        "compiler.libcxx": "libc++",
+                        "compiler.version": "15",
+                        "build_type": "Release"
+                    }
+                },
+                "dependencies": {},
+                "context": "host",
+                "test": false
+            }
+        },
+        "root": {
+            "0": "None"
+        },
+        "overrides": {},
+        "resolved_ranges": {},
+        "replaced_requires": {}
+    }
+}
