@@ -1,0 +1,51 @@
+{
+  "general_data": {
+    "name": "sv-all-sev-sec_watch",
+    "description": "",
+    "active": true,
+    "author": "",
+    "create_ticket_enabled": false,
+    "jira_profile": ""
+  },
+  "notify": { "emails": [] },
+  "project_resources": {
+    "resources": [
+      {
+        "category": "names",
+        "name": "sv-conan-local",
+        "repo_type": "local",
+        "type": "repository",
+        "include_patterns": [],
+        "exclude_patterns": [],
+        "bin_mgr_id": "default"
+      },
+      {
+        "category": "names",
+        "name": "sv-conan-remote",
+        "repo_type": "remote",
+        "type": "repository",
+        "include_patterns": [],
+        "exclude_patterns": [],
+        "bin_mgr_id": "default"
+      },
+      {
+        "category": "names",
+        "name": "somelib_build",
+        "repo_type": "",
+        "type": "build",
+        "include_patterns": [],
+        "exclude_patterns": [],
+        "build_repo": "artifactory-build-info",
+        "bin_mgr_id": "default"
+      }
+    ]
+  },
+  "assigned_policies": [
+    {
+        "name": "all-sev-sec",
+        "type": "security"
+    }
+]
+
+
+}

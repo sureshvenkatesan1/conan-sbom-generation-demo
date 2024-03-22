@@ -1,0 +1,18 @@
+{
+  "name": "all-sev-sec",
+  "type": "security",
+  "author": "sureshv",
+  "rules": [
+    {
+      "name": "all-sev",
+      "priority": 1,
+      "actions": { "block_download": { "unscanned": false, "active": false } },
+      "criteria": {
+        "fix_version_dependant": false,
+        "min_severity": "All severities"
+      }
+    }
+  ],
+  "created": "2022-06-13T21:28:31.11Z",
+  "modified": "2022-06-13T21:28:31.11Z"
+}
