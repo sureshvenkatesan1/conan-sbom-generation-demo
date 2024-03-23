@@ -180,7 +180,7 @@ When you run:
 ```
 jf xr curl -XGET "/api/v2/ci/build/somelib_build/1?include_vulnerabilities=true" --server-id=proservicesone | jq | grep -i violation
 ```
-It returns all the `vulnerabilities` i.e CVEs but `"violations": []` i.e no violations, though   in  UI it shows both the the vulnerabilities and violations.
+It returns all the `vulnerabilities` i.e CVEs but no violations i.e it shows `"violations": []`  , though   in  UI it shows both the  vulnerabilities and violations.
 ```
 jf xr curl -XGET "/api/v2/ci/build/somelib_build/1?include_vulnerabilities=true" --server-id=proservicesone -s | jq | grep -i "cve\":" | wc -l
 
@@ -194,7 +194,35 @@ jf xr curl -XGET "/api/v1/summary/build?build_name=somelib_build&build_number=1"
 
 Output: 29
 ```
-This output also does not have any violations.
+This output also does not have any violations[].
+
+---
+### How to get the list of Violations in a Build , similar to the Violations you see in the UI  ?
+Use the [Get Violations](https://jfrog.com/help/r/xray-rest-apis/get-violations) API and pass the build as the filter as shown below:
+
+```
+jf xr curl -H "Content-Type: application/json" \
+-XPOST "/api/v1/violations" --server-id=proservicesone -s \
+-d '{
+  "filters": {
+     "resources": {
+
+      "builds": [
+        {
+          "name": "somelib_build",
+          "number": "1"
+        }
+      ]
+   }
+  },
+  "pagination": {
+    "order_by": "created",
+    "direction": "asc",
+    "limit": 100,
+    "offset": 1
+  }
+}' | jq | bash display_violations.sh
+```
 
 ---
 ### Get the Build Scan status:
