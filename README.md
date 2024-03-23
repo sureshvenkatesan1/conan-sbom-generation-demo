@@ -11,6 +11,26 @@ Follow the steps and substitute the ``<>`` placeholders with your own informatio
 # <user> and <password> for the Artifactory repo
 ```
 
+### How to build a conan 2.0 project:
+Please review :
+- [conan 2.0 extension commands](https://github.com/conan-io/conan-extensions/blob/main/extensions/commands/art/README.md)  
+- publish to JFrog Artifactory https://docs.conan.io/2/integrations/jfrog.html 
+
+Example conan project in https://blog.conan.io/2023/05/11/tensorflow-lite-cpp-mobile-ml-guide.html
+
+Install conan2.0  using steps in https://docs.conan.io/2/installation.html
+```
+pip install conan cmake
+conan profile detect
+```
+
+This creates a  Profile '/Users/sureshv/.conan2/profiles/default'  which you can find later using:
+```
+conan profile path default
+```
+
+---
+
 ### Steps:
 
 
