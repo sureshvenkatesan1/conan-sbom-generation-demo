@@ -184,6 +184,32 @@ Output:
 ```
 ---
 
+### Get the Build Scan status:
+
+Use the [Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/scan-status) i.e (/api/v1/scan/status) API
+```
+jf xr curl -XPOST "/api/v1/scan/status/build" -H "Content-Type: application/json" --server-id=proservicesone \
+-d '{ "name": "somelib_build", "version": "1"}'
+```
+
+Output:
+```
+{"status":"scanned","is_impact_paths_recovery_required":false}
+```
+
+For Builds you can also use the “[Build Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/build-scan-status)” (/api/v1/build/status) API.
+```
+jf xr curl -H "Content-Type: application/json" \
+-XPOST "/api/v1/build/status" --server-id=proservicesone \
+-d '{ "name": "somelib_build", "number": "1"}'
+```
+Output:
+```
+{"overall":{"status":"DONE","time":"2024-03-22T01:20:30Z"},"details":{"sca":{"status":"DONE","time":"2024-03-22T01:20:28Z"},"violations":{"status":"DONE","time":"2024-03-22T01:20:30Z"}}}
+```
+
+---
+
 ### Get the build scan results
 
 Use the GET option of the [Scan Build V2](https://jfrog.com/help/r/xray-rest-apis/scan-build-v2)
@@ -245,29 +271,34 @@ jf xr curl -H "Content-Type: application/json" \
 ```
 
 ---
-### Get the Build Scan status:
 
-Use the [Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/scan-status) i.e (/api/v1/scan/status) API
-```
-jf xr curl -XPOST "/api/v1/scan/status/build" -H "Content-Type: application/json" --server-id=proservicesone \
--d '{ "name": "somelib_build", "version": "1"}'
-```
+# Software Bill of Materials (SBOM)
 
-Output:
-```
-{"status":"scanned","is_impact_paths_recovery_required":false}
-```
+A Software Bill of Materials (SBOM) is a comprehensive list of components comprising a piece of software, accompanied by relevant metadata such as licensing information. It includes:
 
-For Builds you can also use the “[Build Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/build-scan-status)” (/api/v1/build/status) API.
-```
-jf xr curl -H "Content-Type: application/json" \
--XPOST "/api/v1/build/status" --server-id=proservicesone \
--d '{ "name": "somelib_build", "number": "1"}'
-```
-Output:
-```
-{"overall":{"status":"DONE","time":"2024-03-22T01:20:30Z"},"details":{"sca":{"status":"DONE","time":"2024-03-22T01:20:28Z"},"violations":{"status":"DONE","time":"2024-03-22T01:20:30Z"}}}
-```
+- Open source libraries that an application imports or depends on.
+- Plugins, extensions, or other add-ons utilized by an application.
+- Custom source code developed in-house by developers.
+- Information regarding versions, licensing status, and patch status of these components.
+
+For more details, refer to [Best Practices for Software Bill of Materials Management](https://jfrog.com/devops-tools/article/best-practices-for-software-bill-of-materials-management).
+
+Automated SBOM Creation:
+Automating SBOM creation offers benefits to both developers and product owners. 
+- It eliminates the need for manual SBOM generation, enabling "machine-speed" SBOM generation as advocated by the National Telecommunications and Information Administration. 
+- Additionally, automated SBOMs generated as part of the CI/CD process can be cryptographically signed and verified. Component details can be exported using REST API. 
+Refer to [Export Component Details via REST API](https://jfrog.com/help/r/jfrog-rest-apis/export-component-details).
+
+## SBOM for Artifact:
+
+[sbom_for_artifact.sh](sbom_for_artifact.sh) is a script to download SBOM in CycloneDX format. Users can customize options based on their requirements:
+
+
+
+## SBOM for Build:
+
+[sbom_for_build.sh](sbom_for_build.sh) is a script to download SBOM in SPDX format. Users can customize options based on their requirements:
+
 
 ---
 
@@ -290,3 +321,4 @@ If you encounter the error message "Artifact doesn't exist or is not indexed/cac
 
 
 ---
+
