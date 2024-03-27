@@ -52,6 +52,24 @@ or using jfrog CLI:
 jf xr curl -XPOST api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["somelib_build"]}'  --server-id=proservicesone
 ```
 
+#### With Windows command Prompt:
+curl or  jf with curl  works wiht below syntax to escape double quotes inside json:
+```bash
+jf xr curl -X POST api/v1/binMgr/builds  -d "{\"names\": [\"somelib_build\"]}"  -H "Content-type:application/json"
+
+Or
+
+curl -X POST   -H "Content-type:application/json" https://psemea.jfrog.io/xray/api/v1/binMgr/builds -T x.json -H "Authorization: Bearer eyJ2ZX"
+```
+
+#### With Powershell:
+[Powershell: passing json string to curl - Stack Overflow](https://stackoverflow.com/questions/24745868/powershell-passing-json-string-to-curl)
+Try using the --% operator to put PowerShell into simple (dumb) argument parsing mode:
+This is quite often useful for invoking exes with argument syntax that runs afoul of PowerShell's argument syntax. This does require PowerShell V3 or higher.
+```bash
+jf xr curl --% -X POST api/v1/binMgr/builds  -d "{\"names\": [\"somelib_build\"]}"   -H "Content-type:application/json"
+```
+
 ### Create Repositories
 
 Navigate to the `create_repositories` directory and create  repositories from the exported configurations:
