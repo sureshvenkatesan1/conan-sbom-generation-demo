@@ -52,7 +52,7 @@ To build the Conan application and upload to the Artifactory instance referred b
 Run the following command to add build to Xray indexed resources:
 
 ```bash
-curl -XPOST -u admin:password https://servername.jfrog.io/xray/api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["build-name"]}'
+curl -XPOST -u admin:YOUR-PASSWORD https://proservicesone.jfrog.io/xray/api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["build-name"]}'
 ```
 
 or using jfrog CLI:
