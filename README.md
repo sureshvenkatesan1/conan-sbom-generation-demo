@@ -16,7 +16,7 @@ Please review :
 - [conan 2.0 extension commands](https://github.com/conan-io/conan-extensions/blob/main/extensions/commands/art/README.md)  
 - publish to JFrog Artifactory https://docs.conan.io/2/integrations/jfrog.html 
 
-Example conan project in https://blog.conan.io/2023/05/11/tensorflow-lite-cpp-mobile-ml-guide.html
+Example conan project is in https://blog.conan.io/2023/05/11/tensorflow-lite-cpp-mobile-ml-guide.html
 
 Install conan2.0  using steps in https://docs.conan.io/2/installation.html
 ```
@@ -30,7 +30,16 @@ conan profile path default
 ```
 
 ---
+### install the build info extension commands 
+See steps in https://docs.conan.io/2/integrations/jfrog.html
 
+Using the dedicated repository for Conan extensions https://github.com/conan-io/conan-extensions, it is as easy as:
+```
+conan config install https://github.com/conan-io/conan-extensions.git -sf=extensions/commands/art -tf=extensions/commands/art
+```
+The extension files get copied to  C:\Users\sureshv\.conan2\extensions/commands/art
+
+---
 ### Steps:
 
 
