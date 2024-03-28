@@ -61,7 +61,7 @@ Or
 
 curl -X POST   -H "Content-type:application/json" https://proservicesone.jfrog.io/xray/api/v1/binMgr/builds -T somebuild.json -H "Authorization: Bearer YOUR-ACCESS-TOKEN"
 
-Note: somebuild.json contains
+
 ```
 
 #### With Powershell:
