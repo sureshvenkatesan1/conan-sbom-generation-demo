@@ -24,7 +24,7 @@ pip install conan cmake
 conan profile detect
 ```
 
-This creates a  Profile '/Users/sureshv/.conan2/profiles/default'  which you can find later using:
+This creates a  Profile '/Users/sureshv/.conan2/profiles/default' on unix platforms ( on windows the file is C:\Users\sureshv\.conan2\profiles\default) which you can find later using:
 ```
 conan profile path default
 ```
