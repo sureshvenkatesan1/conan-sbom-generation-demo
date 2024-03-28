@@ -59,12 +59,14 @@ jf xr curl -X POST api/v1/binMgr/builds  -d "{\"names\": [\"somelib_build\"]}"  
 
 Or
 
-curl -X POST   -H "Content-type:application/json" https://psemea.jfrog.io/xray/api/v1/binMgr/builds -T x.json -H "Authorization: Bearer eyJ2ZX"
+curl -X POST   -H "Content-type:application/json" https://proservicesone.jfrog.io/xray/api/v1/binMgr/builds -T somebuild.json -H "Authorization: Bearer YOUR-ACCESS-TOKEN"
+
+Note: somebuild.json contains
 ```
 
 #### With Powershell:
 [Powershell: passing json string to curl - Stack Overflow](https://stackoverflow.com/questions/24745868/powershell-passing-json-string-to-curl)
-Try using the --% operator to put PowerShell into simple (dumb) argument parsing mode:
+Try using the `--%` operator to put PowerShell into simple (dumb) argument parsing mode:
 This is quite often useful for invoking exes with argument syntax that runs afoul of PowerShell's argument syntax. This does require PowerShell V3 or higher.
 ```bash
 jf xr curl --% -X POST api/v1/binMgr/builds  -d "{\"names\": [\"somelib_build\"]}"   -H "Content-type:application/json"
@@ -81,6 +83,40 @@ jf rt curl  -X PUT api/repositories/sv-conan-local -H "Content-Type: application
 jf rt curl  -X PUT api/repositories/sv-conan-remote -H "Content-Type: application/json" -T sv-conan-remote-config.json --server-id=proservicesone
 jf rt curl  -X PUT api/repositories/sv-conan-virtual -H "Content-Type: application/json" -T sv-conan-virtual-config.json --server-id=proservicesone
 ```
+---
+
+For your Conan commandline client to work with this Conan virtual repository, you first need to add the repository to your client configuration using the following command:
+Note: This config saved in the /Users/sureshv/.conan2/remotes.json file in unix systems and 
+C:\Users\sureshv\.conan2\remotes.json in windows .
+
+```
+conan remote add sv-conan-virtual https://proservicesone.jfrog.io/artifactory/api/conan/sv-conan-virtual
+```
+To Login use the command from the conan virtual repo's  `Set Me Up`:
+```
+conan remote login sv-conan-virtual <username> -p <token>
+
+For Example:
+conan remote login sv-conan-virtual admin -p cmVmdGtuOjAxOjE3Ndummy
+
+```
+Output:
+Changed user of remote 'sv-conan-virtual' from 'None' (anonymous) to 'admin' (authenticated)
+
+---
+
+Configure  conan to use  the Artifactory Server as proservicesone
+```
+conan art:server remove proservicesone
+
+conan art:server add proservicesone \
+https://proservicesone.jfrog.io/artifactory --user=admin \
+--password=cmVmdGtuOjAxOjE3Ndummy
+```
+output:
+Server 'proservicesone' (https://proservicesone.jfrog.io/artifactory) added successfully
+
+---
 
 ### Configure Xray Index and Retention Policy
 
