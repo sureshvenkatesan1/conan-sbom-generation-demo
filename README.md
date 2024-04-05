@@ -21,12 +21,26 @@ Example conan project is in https://blog.conan.io/2023/05/11/tensorflow-lite-cpp
 Install conan2.0  using steps in https://docs.conan.io/2/installation.html
 ```
 pip install conan cmake
+```
+Make sure you have the C compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
+Next run:
+```
 conan profile detect
 ```
-
-This creates a  Profile '/Users/sureshv/.conan2/profiles/default' on unix platforms ( on windows the file is C:\Users\sureshv\.conan2\profiles\default) which you can find later using:
+This creates a  Profile `/Users/sureshv/.conan2/profiles/default` on unix platforms ( on windows the file is `C:\Users\sureshv\.conan2\profiles\default`) which you can find later using:
 ```
 conan profile path default
+```
+On my mac where the generated `/Users/sureshv/.conan2/profiles/default` had the following content:
+``` 
+[settings]
+arch=x86_64
+build_type=Release
+compiler=apple-clang
+compiler.cppstd=gnu17
+compiler.libcxx=libc++
+compiler.version=15
+os=Macos
 ```
 
 ---
