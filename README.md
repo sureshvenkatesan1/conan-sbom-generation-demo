@@ -199,7 +199,7 @@ conan remove "somelibrary*" -c
 ```
 
 
-# Fake openssl
+### Fake openssl
 ```
 conan create openssl --build="openssl/1.1.1c*"
 conan upload "openssl/1.1.1c*" -r=sv-conan-virtual -c
@@ -241,7 +241,8 @@ Similarly the published artifact SBOM shows:
 ![somelibrary SBOM](images/somelibrary_sbom.jpg)
 
 ---
-Other useful Xray Rest APIs:
+
+## Other useful Xray Rest APIs:
 
 ### Force the reindex of the build using [Force Reindex](https://jfrog.com/help/r/xray-rest-apis/force-reindex):
 ```
@@ -289,7 +290,6 @@ We strongly recommend moving to using the v2 version of the scan build API. This
 
 Output:
 ```
-Output:
 {"summary":{"total_alerts":0,"fail_build":false,"message":"No Xray “Fail build in case of a violation” policy rule has been defined on this build. The Xray scan will run in parallel to the deployment of the build and will not obstruct the build. To review the Xray scan results, see the Xray Violations tab in the UI.","more_details_url":""},"alerts":[],"licenses":[]}
 ```
 ---
