@@ -51,7 +51,7 @@ Using the dedicated repository for Conan extensions https://github.com/conan-io/
 ```
 conan config install https://github.com/conan-io/conan-extensions.git -sf=extensions/commands/art -tf=extensions/commands/art
 ```
-The extension files get copied to  C:\Users\sureshv\.conan2\extensions/commands/art
+The extension files get copied to  `C:\Users\sureshv\.conan2\extensions\commands\art`
 
 ---
 ### Steps:
