@@ -22,10 +22,10 @@ Install conan2.0  using steps in https://docs.conan.io/2/installation.html
 ```
 pip install conan cmake
 ```
-*Note:* Make sure you have the C/C++ compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
-Otherwise the "conan create .." commands  can fail with:
+**Note:** Make sure you have the C/C++ compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
+Otherwise the `"conan create .."` commands  can fail with:
 `Invalid: 'settings.compiler' value not defined`
-For more details on 'settings.compiler' please review
+For more details on `'settings.compiler'` please review
 - https://docs.conan.io/2/reference/config_files/profiles.html
 - https://docs.conan.io/2.0/reference/commands/profile.html
 
@@ -49,7 +49,7 @@ compiler.version=15
 os=Macos
 ```
 ---
-*Note:* Make sure the profile has settings.compiler set as discussed in
+**Note:** Make sure the profile has settings.compiler set as discussed in
 - https://github.com/conan-io/conan/issues/14064
 - https://github.com/conan-io/conan/issues/14575
 - https://github.com/conan-io/conan/issues/13345
@@ -122,8 +122,9 @@ jf rt curl  -X PUT api/repositories/sv-conan-virtual -H "Content-Type: applicati
 ---
 
 For your Conan commandline client to work with this Conan virtual repository, you first need to add the repository to your client configuration using the following command:
-Note: This config saved in the /Users/sureshv/.conan2/remotes.json file in unix systems and 
-C:\Users\sureshv\.conan2\remotes.json in windows .
+
+**Note:** This config saved in the `/Users/sureshv/.conan2/remotes.json` file in unix systems and 
+`C:\Users\sureshv\.conan2\remotes.json` in Windows .
 
 ```
 conan remote add sv-conan-virtual https://proservicesone.jfrog.io/artifactory/api/conan/sv-conan-virtual
@@ -137,8 +138,9 @@ conan remote login sv-conan-virtual admin -p cmVmdGtuOjAxOjE3Ndummy
 
 ```
 Output:
+```
 Changed user of remote 'sv-conan-virtual' from 'None' (anonymous) to 'admin' (authenticated)
-
+```
 ---
 
 Configure  conan to use  the Artifactory Server as proservicesone
@@ -150,8 +152,9 @@ https://proservicesone.jfrog.io/artifactory --user=admin \
 --password=cmVmdGtuOjAxOjE3Ndummy
 ```
 output:
+```
 Server 'proservicesone' (https://proservicesone.jfrog.io/artifactory) added successfully
-
+```
 ---
 
 ### Configure Xray Index and Retention Policy
@@ -203,7 +206,7 @@ conan upload "openssl/1.1.1c*" -r=sv-conan-virtual -c
 conan create somelibrary --format=json --build="somelibrary*" -r=sv-conan-virtual > create_output.json
 conan upload "somelibrary*" -r=sv-conan-virtual -c
 ```
-*Note:* If a `conan create ...` command above fails with the error
+**Note:** If a `conan create ...` command above fails with the error
 `ImportError: cannot import name 'ConanFile' from 'conans'`  like below for your app:
 ```
 ======== Exporting recipe to the cache ========
@@ -218,7 +221,7 @@ You need to update the recipe to make it compatible with Conan 2
 For this please review the migration guide in https://docs.conan.io/1/conan_v2.html  , starting with the steps in
 [Python import statements](https://docs.conan.io/1/migrating_to_2.0/recipes.html#python-import-statements)
 
-*Note:* As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
+**Note:** As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
 
 ```bash
 # Create the buildInfo file.
