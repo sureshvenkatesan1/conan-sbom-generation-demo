@@ -19,7 +19,6 @@ class FalconConan(ConanFile):
     requires = (
         "boost/1.74.0",             # TODO: run posttrade generators when we upgrade to boost/1.75.0+
                                     #   See https://github.com/boostorg/property_tree/issues/51
-                                    #   and https://gitlab.tradeweb.com/idb/falcon/falcon/-/merge_requests/447
         "bzip2/1.0.8",
         "caf/0.17.6@bincrafters/stable",
         "fmt/7.1.3",
