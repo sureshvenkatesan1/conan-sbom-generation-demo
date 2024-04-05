@@ -22,7 +22,13 @@ Install conan2.0  using steps in https://docs.conan.io/2/installation.html
 ```
 pip install conan cmake
 ```
-Make sure you have the C compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
+*Note:* Make sure you have the C/C++ compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
+Otherwise the "conan create .." commands  can fail with:
+`Invalid: 'settings.compiler' value not defined`
+For more details on 'settings.compiler' please review
+- https://docs.conan.io/2/reference/config_files/profiles.html
+- https://docs.conan.io/2.0/reference/commands/profile.html
+
 Next run:
 ```
 conan profile detect
@@ -42,6 +48,13 @@ compiler.libcxx=libc++
 compiler.version=15
 os=Macos
 ```
+---
+*Note:* Make sure the profile has settings.compiler set as discussed in
+- https://github.com/conan-io/conan/issues/14064
+- https://github.com/conan-io/conan/issues/14575
+- https://github.com/conan-io/conan/issues/13345
+- https://stackoverflow.com/questions/17275348/how-to-specify-new-gcc-path-for-cmake
+
 
 ---
 ### install the build info extension commands 
@@ -180,15 +193,32 @@ conan remove "somelibrary*" -r=sv-conan-virtual -c
 conan remove "openssl/1.1.1c*" -r=sv-conan-virtual -c
 conan remove "openssl/1.1.1c*" -c
 conan remove "somelibrary*" -c
+```
+
 
 # Fake openssl
+```
 conan create openssl --build="openssl/1.1.1c*"
 conan upload "openssl/1.1.1c*" -r=sv-conan-virtual -c
 conan create somelibrary --format=json --build="somelibrary*" -r=sv-conan-virtual > create_output.json
 conan upload "somelibrary*" -r=sv-conan-virtual -c
 ```
+*Note:* If a `conan create ...` command above fails with the error
+`ImportError: cannot import name 'ConanFile' from 'conans'`  like below for your app:
+```
+======== Exporting recipe to the cache ========
+ERROR: Error loading conanfile at 'C:\Users\testuser\Test\falcon\conanfile.py': Unable to load conanfile in C:\Users\testuser\Test\falcon\conanfile.py
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "C:\Users\testuser\Test\falcon\conanfile.py", line 5, in <module>
+    from conans import ConanFile
+ImportError: cannot import name 'ConanFile' from 'conans' (C:\Users\testuser\AppData\Local\Conan\conan\_internal\conans\__init__.pyc)
+```
+it is because you are using a legacy Conan 1 recipe as in [older_conanv1_stuff/conanfile.py](older_conanv1_stuff/conanfile.py) .
+You need to update the recipe to make it compatible with Conan 2
+For this please review the migration guide in https://docs.conan.io/1/conan_v2.html  , starting with the steps in
+[Python import statements](https://docs.conan.io/1/migrating_to_2.0/recipes.html#python-import-statements)
 
-As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
+*Note:* As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
 
 ```bash
 # Create the buildInfo file.
