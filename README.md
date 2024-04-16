@@ -217,7 +217,8 @@ ERROR: Error loading conanfile at 'C:\Users\testuser\Test\falcon\conanfile.py': 
 ImportError: cannot import name 'ConanFile' from 'conans' (C:\Users\testuser\AppData\Local\Conan\conan\_internal\conans\__init__.pyc)
 ```
 it is because you are using a legacy Conan 1 recipe as in [older_conanv1_stuff/conanfile.py](older_conanv1_stuff/conanfile.py) .
-You need to update the recipe to make it compatible with Conan 2
+You need to update the recipe to make it compatible with Conan 2 .
+
 For this please review the migration guide in https://docs.conan.io/1/conan_v2.html  , starting with the steps in
 [Python import statements](https://docs.conan.io/1/migrating_to_2.0/recipes.html#python-import-statements)
 
