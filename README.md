@@ -23,11 +23,35 @@ Install conan2.0  using steps in https://docs.conan.io/2/installation.html
 pip install conan cmake
 ```
 **Note:** Make sure you have the C/C++ compiler installed. On `Windows 2022` instance you can install `Visual Studio 2022`.
+
 Otherwise the `"conan create .."` commands  can fail with:
 `Invalid: 'settings.compiler' value not defined`
+
 For more details on `'settings.compiler'` please review
 - https://docs.conan.io/2/reference/config_files/profiles.html
 - https://docs.conan.io/2.0/reference/commands/profile.html
+
+---
+In Powershell if the `"conan create .."` commands  fail with error `CMake Error: CMAKE_C_COMPILER not set , after EnableLanguage`
+
+It means that CMake cannot find the C compiler required to compile your project. This error often occurs when the C compiler (such as GCC or Clang) is not installed or not properly configured in your system environment.
+
+
+If you install [Mingw-w64](https://www.mingw-w64.org/)  for the GCC compiler on Windows systems and use Powershell,
+make sure to set the `gcc` in PATH using:
+```
+$env:PATH -split ';'
+$env:PATH = $env:PATH + ';<PATH to mingGW bin folder>'
+```
+More permanent steps to set the PATH is mentioned in  
+[Setting Windows PowerShell environment variables - DEV Community](https://dev.to/asmitbm/setting-windows-powershell-environment-variables-2glb) as in [misc_scripts/add_Folder_to_path_in_ps1](misc_scripts/add_Folder_to_path_in_ps1)
+
+Now the following command should work:
+```
+gcc --version
+```
+
+---
 
 Next run:
 ```
@@ -56,8 +80,9 @@ os=Macos
 - https://stackoverflow.com/questions/17275348/how-to-specify-new-gcc-path-for-cmake
 
 
+
 ---
-### install the build info extension commands 
+### Install the build info extension commands 
 See steps in https://docs.conan.io/2/integrations/jfrog.html
 
 Using the dedicated repository for Conan extensions https://github.com/conan-io/conan-extensions, it is as easy as:
