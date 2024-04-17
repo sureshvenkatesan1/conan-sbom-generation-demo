@@ -270,6 +270,74 @@ Similarly the published artifact SBOM shows:
 
 ## Other useful Xray Rest APIs:
 
+### How to Scan an artifact ?
+a) Use the “[Scan Artifact](https://jfrog.com/help/r/jfrog-rest-apis/scan-artifact)” API
+
+```
+curl -H "Authorization: Bearer $MYTOKEN" \
+-XPOST "https://soleng.jfrog.io/xray/api/v1/scanArtifact" \
+-H "Content-Type: application/json" \
+-d '{ "componentID": "docker://image_name:image_tag"}'
+```
+
+Output:
+```
+{
+ "info": "Scan of artifact is in progress"
+}
+```
+or
+
+b) Use the “[Scan Now](https://jfrog.com/help/r/jfrog-rest-apis/scan-now)” API , the enables  you to index resources on-demand, even those that were not marked for indexing
+
+```
+curl -H "Authorization: Bearer $MYTOKEN" \
+-XPOST "https://soleng.jfrog.io/xray/api/v2/index" \
+-H "Content-Type: application/json" \
+-d '{   
+  "repo_path":"local-maven-repo/org/jenkins-ci/main/jenkins-war/2.289.1/jenkins-war-2.289.1.war"
+}'
+```
+
+Output:
+```
+{
+   "sent_to_reindex": {
+       "artifacts": [
+           {
+               "repository": "local-maven-repo",
+               "path": "org/jenkins-ci/main/jenkins-war/2.289.1/jenkins-war-2.289.1.war"
+           }
+       ]
+   }
+}
+```
+Then get the scan status  using [Artifact Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/artifact-scan-status) API  
+```
+curl -H "Authorization: Bearer $MYTOKEN" \
+-XPOST "https://soleng.jfrog.io/xray/api/v1/artifact/status" \
+-H "Content-Type: application/json" \
+-d '{
+  "repo": "docker-local",
+  "path": "desktop-storage/1.0/manifest.json"
+}'
+```
+or
+
+Use the [Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/scan-status) API
+``
+curl -H "Authorization: Bearer $MYTOKEN" \
+-XPOST "https://soleng.jfrog.io/xray/api/v1/scan/status/artifact" \
+-H "Content-Type: application/json" \
+-d '{
+   "repository_pkg_type": "Npm",
+   "path": "npm-local/static-module-3.0.4.tar.gz",
+   "sha256": "b0a887f6e5c16134b7d1280c2150d38811357642d56c622c6f7f6b239f668608",
+   "sha1": "2ed14fc6f7899d089cd5a2b880121d9467c32d46"
+}'
+```
+
+---
 ### Force the reindex of the build using [Force Reindex](https://jfrog.com/help/r/xray-rest-apis/force-reindex):
 ```
 jf xr curl -XPOST  /api/v1/forceReindex -H 'content-type:application/json'  --server-id=proservicesone -d '{
