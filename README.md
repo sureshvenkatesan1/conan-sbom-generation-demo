@@ -325,7 +325,7 @@ curl -H "Authorization: Bearer $MYTOKEN" \
 or
 
 Use the [Scan Status](https://jfrog.com/help/r/jfrog-rest-apis/scan-status) API
-``
+```
 curl -H "Authorization: Bearer $MYTOKEN" \
 -XPOST "https://soleng.jfrog.io/xray/api/v1/scan/status/artifact" \
 -H "Content-Type: application/json" \
