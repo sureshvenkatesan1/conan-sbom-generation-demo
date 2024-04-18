@@ -248,7 +248,7 @@ For migrating legacy Conan1.0 recipe to Conan2.0 please review the migration gui
 
 If you encounter any difficulties during the migration process to Conan 2 while following the provided instructions, please feel free to raise specific questions by submitting GitHub tickets at https://github.com/conan-io/conan/issues.
 
-**Note:** As mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
+**Note:** Next as mentioned in [119#issue comment](https://github.com/conan-io/conan-extensions/issues/119#issuecomment-2006635811) pass the local repo as argument when generating the buildInfo instead of the virtual repo:
 
 ```bash
 # Create the buildInfo file.
