@@ -244,8 +244,7 @@ ImportError: cannot import name 'ConanFile' from 'conans' (C:\Users\testuser\App
 it is because you are using a legacy Conan 1 recipe as in [older_conanv1_stuff/conanfile.py](older_conanv1_stuff/conanfile.py) .
 You need to update the recipe to make it compatible with Conan 2 .
 
-For this please review the migration guide in https://docs.conan.io/1/conan_v2.html  , starting with the steps in
-[Python import statements](https://docs.conan.io/1/migrating_to_2.0/recipes.html#python-import-statements) .
+For migrating legacy Conan1.0 recipe to Conan2.0 please review the migration guide in https://docs.conan.io/1/conan_v2.html  , starting with the steps in [Python import statements](https://docs.conan.io/1/migrating_to_2.0/recipes.html#python-import-statements) .
 
 If you encounter any difficulties during the migration process to Conan 2 while following the provided instructions, please feel free to raise specific questions by submitting GitHub tickets at https://github.com/conan-io/conan/issues.
 
