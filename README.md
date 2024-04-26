@@ -37,7 +37,7 @@ In Powershell if the `"conan create .."` commands  fail with error `CMake Error:
 It means that CMake cannot find the C compiler required to compile your project. This error often occurs when the C compiler (such as GCC or Clang) is not installed or not properly configured in your system environment.
 
 
-If you install [Mingw-w64](https://www.mingw-w64.org/)  for the GCC compiler on Windows systems and use Powershell,
+If you install [Mingw-w64](https://www.mingw-w64.org/)  for the GCC compiler on Windows systems ( I installed `GCC 13.2.0 (with POSIX threads Win64` from https://winlibs.com/) and use Powershell,
 make sure to set the `gcc` in PATH using:
 ```
 $env:PATH -split ';'
@@ -104,7 +104,7 @@ To build the Conan application and upload to the Artifactory instance referred b
 Run the following command to add build to Xray indexed resources:
 
 ```bash
-curl -XPOST -u admin:YOUR-PASSWORD https://proservicesone.jfrog.io/xray/api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["build-name"]}'
+curl -XPOST -u admin:YOUR-PASSWORD https://proservicesone.jfrog.io/xray/api/v1/binMgr/builds -H 'content-type:application/json' -d '{"names": ["somelib_build"]}'
 ```
 
 or using jfrog CLI:
