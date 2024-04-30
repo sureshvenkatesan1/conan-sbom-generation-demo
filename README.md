@@ -50,8 +50,12 @@ Now the following command should work:
 ```
 gcc --version
 ```
-Note: I was not able to generate the `somelib_build.json` using steps below in Powershell or the windows command prompt.
-So I installed Git for windows from https://gitforwindows.org/ and used the Git bash and then below steps worked and I was able to generate and publish the buildinfo.
+Note: On windows build instance I was still not able to generate the `somelib_build.json` using steps below in Powershell or the windows command prompt as it fails with:
+```
+ERROR: Error: The file create_output.json is not a valid JSON file.
+```
+So I installed Git for windows from https://gitforwindows.org/ and used the Git bash and then below steps worked and I was able to generate and publish the buildinfo. 
+Similarly below steps to generate and publish the buildinfo works on unix and mac OS as well.
 
 ---
 
