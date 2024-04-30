@@ -50,6 +50,8 @@ Now the following command should work:
 ```
 gcc --version
 ```
+Note: I was not able to generate the `somelib_build.json` using steps below in Powershell or the windows command prompt.
+So I installed Git for windows from https://gitforwindows.org/ and used the Git bash and then below steps worked and I was able to generate and publish the buildinfo.
 
 ---
 
