@@ -533,3 +533,7 @@ If you encounter the error message "Artifact doesn't exist or is not indexed/cac
 
 ---
 
+### References:
+- https://github.com/chaitanyagovande/conan-hello-world
+- [Conan and C/C++ Support in Xray](https://jfrog.com/help/r/jfrog-artifactory-documentation/conan-and-c/c-support-in-xray)
+    - [Scan C/C++ Builds](https://jfrog.com/help/r/jfrog-artifactory-documentation/scan-c/c-builds)
